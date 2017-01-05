@@ -13,7 +13,6 @@ import application.Bridges.Bridge;
 
 
 public class MainController {
-
 		@FXML
 		private WebView sideMenu;
 		@FXML
@@ -21,8 +20,8 @@ public class MainController {
 		@FXML
 		private void initialize() throws InterruptedException
 		{
-			Bridge bridge = new Bridge();
 			WebEngine mainEngine = mainView.getEngine();
+			Bridge bridge = new Bridge(mainEngine);
 			URL mainResource = MainController.class.getResource("/html/warnings/warning.html");
 			String mainExternalForm = mainResource.toExternalForm();
 			mainEngine.load(mainExternalForm);
@@ -40,5 +39,7 @@ public class MainController {
 			String sideMenuExternalForm = sideResource.toExternalForm();
 			sideEngine.load(sideMenuExternalForm);
 		}
+		
+		
 		
 }
