@@ -18,30 +18,27 @@ public class MainController {
 		private WebView sideMenu;
 		@FXML
 		private WebView mainView;
-		
 		@FXML
 		private void initialize() throws InterruptedException
 		{
+			Bridge bridge = new Bridge();
 			WebEngine mainEngine = mainView.getEngine();
 			URL mainResource = MainController.class.getResource("/html/warnings/warning.html");
 			String mainExternalForm = mainResource.toExternalForm();
 			mainEngine.load(mainExternalForm);
-			
+		
 			WebEngine sideEngine = sideMenu.getEngine();
+			 sideEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
+			        public void changed(ObservableValue ov, State oldState, State newState) {
+			            if (newState == State.SUCCEEDED) {
+			                JSObject win = (JSObject) sideEngine.executeScript("window");
+			                win.setMember("app", bridge);
+			            }
+			        }
+			    });
 			URL sideResource = MainController.class.getResource("/html/menus/side.html");
 			String sideMenuExternalForm = sideResource.toExternalForm();
-			sideEngine.getLoadWorker().stateProperty().addListener(
-			        new ChangeListener<State>() {
-			            public void changed(ObservableValue ov, State oldState, State newState) {
-			                if (newState == State.SUCCEEDED) {
-			                	JSObject jsobj = (JSObject) sideEngine.executeScript("window");
-			                	jsobj.setMember("app", new Bridge());
-			                }
-			            }
-			        });
 			sideEngine.load(sideMenuExternalForm);
-		    JSObject win = (JSObject) sideEngine.executeScript("document");
-		    win.setMember("app", new Bridge());
 		}
 		
 }

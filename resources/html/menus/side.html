@@ -46,7 +46,14 @@
   	{
   		$("li").click(function()
   		{
-  			app.switchScreen();
+  			try
+  			{
+  				app.switchScreen();
+  			}
+  			catch(err)
+  			{
+  				$("body").append("<p>"+err+"</p><p>"+app+"</p>");
+  			}
   			$(".active").removeClass("active");
   			$(this).addClass("active");
   		});
