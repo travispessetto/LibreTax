@@ -9,9 +9,12 @@ public class Bridge{
 		_mainView = mainView;
 	}
 	
-	public void switchScreen() {
-		// TODO Auto-generated method stub
-		System.out.println("Switch Screen");
-		_mainView.load("https://google.com");
+	public void switchScreen(String action)
+	{
+		if(action == "income")
+		{
+			
+		}
+		
 	}
 }
