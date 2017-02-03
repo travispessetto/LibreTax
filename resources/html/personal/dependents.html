@@ -1,1 +1,85 @@
-<h1>Dependents!</h1>
+<script>
+	$("#addDependent").click(function()
+	{
+		app.Log("Add Dependent");
+		var dependent = document.createElement("div");
+		dependent.setAttribute("class","row");
+		
+		var name = document.createElement("div");
+		name.setAttribute("class","col-md-3 col-sm-3 col-xs-3");
+		var nameField = document.createElement("input");
+		nameField.setAttribute("class","form-control");
+		nameField.setAttribute("name","dependent_first_name");
+		
+		var lastName = document.createElement("div");
+		lastName.setAttribute("class","col-md-3 col-sm-3 col-xs-3");
+		var lastNameField = document.createElement("input");
+		lastNameField.setAttribute("class","form-control");
+		lastNameField.setAttribute("name","dependent_last_name");
+		
+		var ssn = document.createElement("div");
+		ssn.setAttribute("class","col-md-2 col-sm-2 col-xs-2");
+		var ssnField = document.createElement("input");
+		ssnField.setAttribute("class","form-control");
+		ssnField.setAttribute("name","dependent_ssn");
+		
+		var relationship = document.createElement("div");
+		relationship.setAttribute("class","col-md-2 col-sm-2 col-xs-2");
+		var relationshipField = document.createElement("input");
+		relationshipField.setAttribute("name","dependent_relationship");
+		relationshipField.setAttribute("class","form-control");
+		
+		var childCredit = document.createElement("div");
+		childCredit.setAttribute("class","col-md-2 col-sm-2 col-xs-2 text-center");
+		var childCreditField = document.createElement("input");
+		childCreditField.setAttribute("type","checkbox");
+		childCreditField.setAttribute("name","dependent_child_credit"); 
+		
+		name.appendChild(nameField);
+		dependent.appendChild(name);
+		
+		lastName.appendChild(lastNameField);
+		dependent.appendChild(lastName);
+		
+		ssn.appendChild(ssnField);
+		dependent.appendChild(ssn);
+		
+		relationship.appendChild(relationshipField);
+		dependent.appendChild(relationship);
+		
+		childCredit.appendChild(childCreditField);
+		dependent.appendChild(childCredit);
+		
+		$("form").append(dependent);
+		
+	});
+</script>
+
+<h1 class="text-center">Dependents</h1>
+<div class="col-md-12">
+<form id="dependents">
+<div class="row">
+	<div class="col-md-3 col-sm-3 col-xs-3">
+		First Name
+	</div>
+	<div class="col-md-3 col-sm-3 col-xs-3">
+		Last Name
+	</div>
+	<div class="col-md-2 col-sm-2 col-xs-2">
+		SSN
+	</div>
+	<div class="col-md-2 col-sm-2 col-xs-2">
+		Relationship to You
+	</div>
+	<div class="col-md-2 col-sm-2 col-xs-2">
+		Child under age 17 qualifying for child
+		tax credit
+	</div>
+</div>
+</form>
+<div class="row text-right">
+	<div class="col-md-12">
+		<button class="btn btn-primary" id="addDependent" type="button"><i class="fa fa-plus"></i>&nbsp;Add Dependent</button>
+	</div>
+</div>
+</div>

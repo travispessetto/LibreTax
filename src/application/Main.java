@@ -14,7 +14,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			SplitPane root = FXMLLoader.load(getClass().getClassLoader().getResource("MainScreen.fxml"));
-			Scene scene = new Scene(root,800,400,Color.BLACK);
+			Scene scene = new Scene(root,1600,700,Color.BLACK);
 			primaryStage.setTitle("Libre Tax");
 			primaryStage.setScene(scene);
 			primaryStage.show();

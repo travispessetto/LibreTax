@@ -28,7 +28,7 @@ public class Dependents implements IInterview  {
 
 	@Override
 	public void AcceptJSON(String json) {
-		// TODO Auto-generated method stub
+		System.out.println(json);
 		
 	}
 
