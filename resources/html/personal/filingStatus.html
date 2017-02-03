@@ -1,0 +1,20 @@
+<script type="text/javascript">
+	$("button").click(function()
+	{
+		app.Log("Button Clicked");
+		$("button").removeClass("btn-active");
+		$(this).addClass("btn-active");
+		$("#filingStatus").val($(this).attr('data-filingStatus'));
+	});
+</script>
+<div class="container-fluid">
+	<h1 class="text-center">Select a Filing Status</h1>
+	<div class="row text-center">
+		<button class="btn btn-xl btn-primary" data-filingStatus="single"><i class="fa fa-5x fa-male"></i><br />Single</button>
+		<button class="btn btn-xl btn-primary" data-filingStatus="married separate"><i class="fa fa-5x fa-male"></i>&nbsp;&nbsp;&nbsp;<i class="fa  fa-5x fa-female"></i><br />Single Filing Separately</button>
+		<button class="btn btn-xl btn-primary" data-filingStatus="married joint"><i class="fa fa-5x fa-male"></i><i class="fa fa-5x fa-female"></i><br />Married Filing Jointly</button>
+	</div>
+	<form>
+		<input name="filingStatus" id="filingStatus" type="hidden" />
+	</form>
+</div>

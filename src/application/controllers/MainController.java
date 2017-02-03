@@ -25,23 +25,30 @@ public class MainController {
 		
 		private boolean displayWarning = true;
 		private IHandler currentHandler = new PersonalInfoHandler();
+		private WebEngine mainEngine;
 		
 		@FXML
 		private void initialize() throws InterruptedException
 		{
-			WebEngine mainEngine = mainView.getEngine();
-			Bridge bridge = new Bridge(mainEngine);
+			mainEngine = mainView.getEngine();
+			Bridge bridge = new Bridge(this);
 			mainEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>(){
 				public void changed(ObservableValue ov, State oldState, State newState)
 				{
 					if(newState == State.SUCCEEDED)
 					{
+						JSObject win = (JSObject) mainEngine.executeScript("window");
+		                win.setMember("app", bridge);
 						if(displayWarning)
 						{
-							displayWarning = false;
 							URL warning = MainController.class.getResource("/html/warnings/warning.html");
 							mainEngine.executeScript("$.get({url: '"+warning.toExternalForm()+"', success: function(data){$('body').html(data);}});");
 						}
+					}
+					else
+					{
+						JSObject win = (JSObject) mainEngine.executeScript("window");
+		                win.setMember("app", bridge);
 					}
 				}
 			});
@@ -65,11 +72,30 @@ public class MainController {
 			nextBtn.setOnAction(new EventHandler<ActionEvent>(){
 				@Override public void handle(ActionEvent e)
 				{
-					mainEngine.executeScript("$.get({url: '"+currentHandler.Start()+"', success: function(data){$('body').html(data);}});");
+					if(displayWarning)
+					{
+						mainEngine.executeScript("$.get({url: '"+currentHandler.Start()+"', success: function(data){$('body').html(data);}});");
+						displayWarning = false;
+					}
+					else
+					{
+						System.out.println("Parse Data");
+						mainEngine.executeScript("$(\"form\").submit()");
+						mainEngine.executeScript("$.get({url: '"+currentHandler.Start()+"', success: function(data){$('body').html(data);}});");
+					}
+					
 			    }
 			});
 		}
 		
+		public void AcceptJSON(String json)
+		{
+			currentHandler.AcceptJSON(json);
+		}
 		
+		public void NextInterview()
+		{
+			currentHandler.Next();
+		}
 		
 }
