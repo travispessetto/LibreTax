@@ -13,7 +13,7 @@ public class FilingStatus implements IInterview
 	
 	public FilingStatus()
 	{
-		Next = new Dependents();
+		Next = new PrimaryInfo();
 	}
 	
 	public IInterview Next()
