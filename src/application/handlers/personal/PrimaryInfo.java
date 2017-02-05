@@ -9,11 +9,17 @@ public class PrimaryInfo implements IInterview
 {
 
 	private String firstName, initial, lastName, streetaddress, city, state, zip;
+	private IInterview Next;
+	
+	public PrimaryInfo(IInterview next)
+	{
+		Next = next;
+	}
+	
 	@Override
 	public IInterview Next() 
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return Next;
 	}
 
 	@Override

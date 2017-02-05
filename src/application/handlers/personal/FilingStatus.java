@@ -1,10 +1,12 @@
 package application.handlers.personal;
 
 import java.net.URL;
+import java.util.List;
 
 import application.controllers.MainController;
 import application.handlers.IInterview;
 import application.handlers.PersonalInfoHandler;
+import application.json.SimpleJsonParser;
 
 public class FilingStatus implements IInterview 
 {
@@ -13,7 +15,7 @@ public class FilingStatus implements IInterview
 	
 	public FilingStatus()
 	{
-		Next = new PrimaryInfo();
+		
 	}
 	
 	public IInterview Next()
@@ -36,7 +38,21 @@ public class FilingStatus implements IInterview
 	@Override
 	public void AcceptJSON(String json)
 	{
-		System.out.println(json);
+		SimpleJsonParser parser = new SimpleJsonParser();
+		parser.parseJson(json);
+		List<String> filingStatusList = parser.getValue("filingStatus");
+		if(filingStatusList != null)
+		{
+			String fillingStatus = filingStatusList.get(0);
+			if(fillingStatus.equals("married joint"))
+			{
+				// Next must have spouse
+			}
+			else
+			{
+				Next = new PrimaryInfo(null);
+			}
+		}
 	}
 
 }
