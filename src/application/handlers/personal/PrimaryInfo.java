@@ -4,6 +4,7 @@ import java.net.URL;
 
 import application.controllers.MainController;
 import application.handlers.IInterview;
+import application.json.SimpleJsonParser;
 
 public class PrimaryInfo implements IInterview
 {
@@ -11,9 +12,9 @@ public class PrimaryInfo implements IInterview
 	private String firstName, initial, lastName, streetaddress, city, state, zip;
 	private IInterview Next;
 	
-	public PrimaryInfo(IInterview next)
+	public PrimaryInfo()
 	{
-		Next = next;
+		Next = new Dependents();
 	}
 	
 	@Override
@@ -38,8 +39,13 @@ public class PrimaryInfo implements IInterview
 	@Override
 	public void AcceptJSON(String json) 
 	{
-		System.out.println(json);
-		
+		SimpleJsonParser parser = new SimpleJsonParser();
+		parser.parseJson(json);
+	}
+	
+	public void setSpouseInfoNext(SpouseInfo spouseInfo)
+	{
+		Next = spouseInfo;
 	}
 
 }

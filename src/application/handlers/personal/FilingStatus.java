@@ -44,13 +44,17 @@ public class FilingStatus implements IInterview
 		if(filingStatusList != null)
 		{
 			String fillingStatus = filingStatusList.get(0);
-			if(fillingStatus.equals("married joint"))
+			if(fillingStatus.equals("married joint") || fillingStatus.equals("married separate"))
 			{
-				// Next must have spouse
+				PrimaryInfo primaryInfo = new PrimaryInfo();
+				SpouseInfo spouseInfo = new SpouseInfo();
+				primaryInfo.setSpouseInfoNext(spouseInfo);
+				
+				Next = primaryInfo;
 			}
 			else
 			{
-				Next = new PrimaryInfo(null);
+				Next = new PrimaryInfo();
 			}
 		}
 	}
